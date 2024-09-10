@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/slices/authSlice";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const Home = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
@@ -17,7 +18,7 @@ const Home = () => {
   };
   const handleUnauthorized = () => {
     if (!isAuthenticated) {
-      alert("You are not authenticated! Please login to access the dashboard.");
+      toast("You are not authenticated!", { type: "error" });
     } else {
       navigate("/dashboard");
     }
@@ -61,6 +62,8 @@ const Home = () => {
       >
         Not login
       </Button>
+              <ToastContainer />
+
     </Box>
   );
 };
