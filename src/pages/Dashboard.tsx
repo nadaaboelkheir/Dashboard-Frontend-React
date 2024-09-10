@@ -21,7 +21,9 @@ const Dashboard = () => {
       }}
     >
       <Sidebar />
-      <Box sx={{ width: "100%", overflowY: "scroll" }}>
+      <Box
+        sx={{ width: "100%", overflowY: "scroll", justifyContent: "center" }}
+      >
         <Header />
         <Hero />
         <Box
@@ -34,6 +36,7 @@ const Dashboard = () => {
               lg: "row",
             },
             gap: "1rem",
+            alignItems:{xs:"center",lg:"flex-start"} ,
           }}
         >
           <AnnouncementSection />

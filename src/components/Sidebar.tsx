@@ -44,7 +44,7 @@ const Sidebar = () => {
           lg: "18%",
         },
         overflowX: {
-          xs: "auto",
+          xs: "hidden",
           lg: "hidden",
         },
         whiteSpace: {
@@ -75,6 +75,10 @@ const Sidebar = () => {
           sx={{
             color: "white",
             display: { xs: "none", sm: "block" },
+            mx: {
+              xs: 0,
+              sm: 2,
+            },
           }}
         >
           Coligo
