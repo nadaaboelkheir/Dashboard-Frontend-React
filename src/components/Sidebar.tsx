@@ -44,8 +44,10 @@ const Sidebar = () => {
           lg: "18%",
         },
         overflowX: {
-          xs: "hidden",
+          // xs: "hidden",
           lg: "hidden",
+          xs: "auto",
+
         },
         whiteSpace: {
           xs: "nowrap",
