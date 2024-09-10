@@ -4,8 +4,9 @@ import { Stack, Typography } from "@mui/material";
 export interface itemProps {
   icon: ReactNode;
   title: string;
+  onClick?: () => void;
 }
-const SidebarItem = ({ icon, title }: itemProps) => {
+const SidebarItem = ({ icon, title, onClick }: itemProps) => {
   return (
     <Stack
       direction="row"
@@ -28,6 +29,8 @@ const SidebarItem = ({ icon, title }: itemProps) => {
           color: "#17587d",
         },
       }}
+
+      onClick={onClick}
     >
       {icon}
       <Typography
