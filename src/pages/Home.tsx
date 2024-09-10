@@ -1,5 +1,28 @@
 import { Box, Button } from "@mui/material";
-function Home() {
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/slices/authSlice";
+import { RootState } from "../redux/store";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    dispatch(login());
+    navigate("/dashboard");
+  };
+  const handleUnauthorized = () => {
+    if (!isAuthenticated) {
+      alert("You are not authenticated! Please login to access the dashboard.");
+    } else {
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -20,6 +43,7 @@ function Home() {
           },
         }}
         variant="contained"
+        onClick={handleLogin}
       >
         login
       </Button>
@@ -33,11 +57,12 @@ function Home() {
           },
         }}
         variant="contained"
+        onClick={handleUnauthorized}
       >
         Not login
       </Button>
     </Box>
   );
-}
+};
 
 export default Home;
