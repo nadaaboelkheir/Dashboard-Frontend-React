@@ -14,6 +14,7 @@ const App= () => {
           path="/dashboard"
           element={
             <RequireAuth>
+              
               <Dashboard />
             </RequireAuth>
           }

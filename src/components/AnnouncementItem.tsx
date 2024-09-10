@@ -1,7 +1,10 @@
 import { Box, Typography, Divider } from "@mui/material";
 import photo from "../assets/Avatar.png";
-
-function AnnouncementItem() {
+import { Announcement } from "../services/FetchAannouncementS";
+interface AnnouncementItemProps {
+  announcement: Announcement; 
+}
+const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
   return (
     <Box
       sx={{
@@ -24,10 +27,10 @@ function AnnouncementItem() {
           width: "50px",
           height: "50px",
           borderRadius: "50%",
-          display:{
+          display: {
             xs: "none",
             sm: "block",
-          }
+          },
         }}
       />
       <Box
@@ -59,10 +62,10 @@ function AnnouncementItem() {
             fontFamily={"Inria Sans"}
             sx={{
               color: "#5d6c6b",
-              whiteSpace: { lg: "nowrap", sm: "normal"},
+              whiteSpace: { lg: "nowrap", sm: "normal" },
             }}
           >
-            Mrs. Salma Mohamed
+            {announcement.userName}
           </Typography>
           <Typography
             variant="h6"
@@ -74,7 +77,7 @@ function AnnouncementItem() {
               textAlign: { xs: "center", sm: "left" },
             }}
           >
-            Math 101
+            {announcement.subject}
           </Typography>
         </Box>
         <Box
@@ -99,12 +102,11 @@ function AnnouncementItem() {
             },
           }}
         >
-          Here we are, Are you ready to fight? Don’t worry, we prepared some
-          tips to be ready for your exams.{" "}
+          {announcement.content}
         </Typography>
       </Box>
     </Box>
   );
-}
+};
 
 export default AnnouncementItem;

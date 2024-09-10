@@ -1,6 +1,18 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import AnnouncementItem from "./AnnouncementItem";
-function AnnouncementSection() {
+import ErrorIcon from "@mui/icons-material/Error";
+import { useQuery } from "@tanstack/react-query";
+import {
+  fetchAnnouncements,
+  Announcement,
+} from "../services/FetchAannouncementS";
+
+const AnnouncementSection = () => {
+  const { data, isLoading, error } = useQuery<Announcement[]>({
+    queryKey: ["announcements"],
+    queryFn: fetchAnnouncements,
+  });
+
   return (
     <Box
       sx={{
@@ -45,32 +57,59 @@ function AnnouncementSection() {
         </Button>
       </Box>
       <Typography
-          variant="subtitle1"
-          fontWeight={400}
-          fontFamily={"Inria Sans"}
-          sx={{ color: "#c7d3da" }}
-        >
-We educate warriors,stay updated!
-
-</Typography>
+        variant="subtitle1"
+        fontWeight={400}
+        fontFamily={"Inria Sans"}
+        sx={{ color: "#c7d3da" }}
+      >
+        We educate warriors,stay updated!
+      </Typography>
       <Box
         sx={{
           width: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-around",
-          alignItems: "center",
+          alignItems: isLoading || error ? "center" : "flex-start",
         }}
       >
-        <AnnouncementItem />
-        <AnnouncementItem />
-
-        <AnnouncementItem />
-
-        <AnnouncementItem />
+        {isLoading && (
+          <Box>
+            <CircularProgress sx={{ color: "#52CAC3" }} />
+          </Box>
+        )}
+        {error && (
+          <Box sx={{ display: "flex", alignItems: "center", gap: ".5em" }}>
+            <ErrorIcon sx={{ color: "#c7d3da", fontSize: "3rem" }} />{" "}
+            <Typography
+              variant="h6"
+              fontWeight={400}
+              fontFamily={"Inria Sans"}
+              sx={{ color: "#c7d3da" }}
+            >
+              {error.message}
+            </Typography>{" "}
+          </Box>
+        )}
+        {data?.length === 0 && (
+          <Typography
+            variant="h6"
+            fontWeight={400}
+            fontFamily={"Inria Sans"}
+            sx={{ color: "#c7d3da" }}
+          >
+            No announcements found
+          </Typography>
+        )}
+        {data?.map((announcement) => (
+          <AnnouncementItem
+            key={announcement._id}
+            announcement={announcement}
+          />
+        ))}
       </Box>
     </Box>
   );
-}
+};
 
 export default AnnouncementSection;

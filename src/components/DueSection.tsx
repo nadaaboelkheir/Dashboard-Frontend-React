@@ -1,6 +1,14 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import DueItem from "./DueItem";
-function DueSection() {
+import { useQuery } from "@tanstack/react-query";
+import { fetchDues, Due } from "../services/FetchDues";
+import ErrorIcon from "@mui/icons-material/Error";
+
+const DueSection = () => {
+  const { data, isLoading, error } = useQuery<Due[]>({
+    queryKey: ["dues"],
+    queryFn: fetchDues,
+  });
   return (
     <Box
       sx={{
@@ -52,11 +60,53 @@ function DueSection() {
       >
         We educate warriors,stay updated!
       </Typography>
-      <DueItem />
-      <DueItem />
+      {isLoading && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: "1rem",
+          }}
+        >
+          <CircularProgress sx={{ color: "#52CAC3" }} />
+        </Box>
+      )}
+      {error && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: ".5em",
+            mt: "1rem",
+          }}
+        >
+          <ErrorIcon sx={{ color: "#c7d3da", fontSize: "1.5rem" }} />{" "}
+          <Typography
+            variant="subtitle1"
+            fontWeight={400}
+            fontFamily={"Inria Sans"}
+            sx={{ color: "#c7d3da" }}
+          >
+            {error.message}
+          </Typography>{" "}
+        </Box>
+      )}
+      {data?.length === 0 && (
+        <Typography
+          variant="subtitle1"
+          fontWeight={400}
+          fontFamily={"Inria Sans"}
+          sx={{ color: "#c7d3da", mt: "1rem" }}
+        >
+          No Due found
+        </Typography>
+      )}
+      {data?.map((due) => (
+        <DueItem key={due.id} due={due} />
+      ))}
     </Box>
-    
   );
-}
+};
 
 export default DueSection;

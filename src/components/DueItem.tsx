@@ -1,7 +1,17 @@
 import { Typography, Box, Divider, Button } from "@mui/material";
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-// import HourglassTopIcon from '@mui/icons-material/HourglassTop';
-function DueItem() {
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import { Due } from "../services/FetchDues";
+import { format } from 'date-fns';
+
+interface DueItemProps {
+  due: Due;
+}
+const DueItem = ({ due }: DueItemProps) => {
+  const dueDate = new Date(due.DueTo);
+
+  const formattedDate = format(dueDate, 'd MMM yyyy - hh:mm a');
+
   return (
     <Box
       sx={{
@@ -14,16 +24,18 @@ function DueItem() {
         padding: "1rem",
       }}
     >
-        <Box sx={{ display: "flex" , alignItems: "center", gap: ".5em" }}>
-        <AssignmentTurnedInIcon sx={{color: "#52CAC3"}}/>
-      <Typography
-        variant="h6"
-        fontWeight={700}
-        fontFamily={"Inria Sans"}
-        sx={{ color: "#5d6c6b" }}
-      >
-        Course : Arabic K12{" "}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: ".5em" }}>
+        {
+          due.dueType === "Assignment" ? <HourglassTopIcon sx={{ color: "#52CAC3" }} /> : <AssignmentTurnedInIcon sx={{ color: "#52CAC3" }} />
+        }
+        <Typography
+          variant="h6"
+          fontWeight={700}
+          fontFamily={"Inria Sans"}
+          sx={{ color: "#5d6c6b" }}
+        >
+        {due.title}
+        </Typography>
       </Box>
 
       <Typography
@@ -32,7 +44,7 @@ function DueItem() {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Course : Arabic K12{" "}
+        Course : {due.courseName}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -40,7 +52,7 @@ function DueItem() {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Topic : Arabic{" "}
+        Topic : {due.topic}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -48,7 +60,7 @@ function DueItem() {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Due To: 12/12/2022 12:00 PM
+        Due To: {formattedDate}
       </Typography>
       <Button
         sx={{
@@ -61,12 +73,11 @@ function DueItem() {
         }}
         variant="outlined"
       >
-        {" "}
-        Start Quiz
+        Start {due.dueType}
       </Button>
       <Divider sx={{ width: "90%" }} />
     </Box>
   );
-}
+};
 
 export default DueItem;
