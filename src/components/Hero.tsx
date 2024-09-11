@@ -1,8 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import hero from "../assets/hero.png";
 import { t } from "i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 function Hero() {
+  const language = useSelector((state: RootState) => state.language.language);
+
   return (
     <Box
       sx={{
@@ -85,7 +89,8 @@ function Hero() {
             },
           }}
         >
-{t("heroTitle") }       </Typography>
+          {t("heroTitle")}{" "}
+        </Typography>
         <Typography
           variant="h6"
           sx={{
@@ -97,7 +102,7 @@ function Hero() {
               sm: "1.2rem",
               lg: "1.5rem",
             },
-            textAlign: "left",
+            textAlign: language === "en" ? "left" : "right",
           }}
         >
           {t("heroSubtitle")}
@@ -115,7 +120,8 @@ function Hero() {
             },
           }}
         >
-{t("quote")}        </Typography>
+          {t("quote")}{" "}
+        </Typography>
         <Button
           sx={{
             backgroundColor: "#55cfc6",
@@ -132,7 +138,7 @@ function Hero() {
           variant="contained"
           size="large"
         >
-          {t("heroButton")} 
+          {t("heroButton")}
         </Button>
       </Box>
       <Box

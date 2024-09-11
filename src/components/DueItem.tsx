@@ -87,7 +87,7 @@ const DueItem = ({ due }: DueItemProps) => {
         }}
         variant="outlined"
       >
-        {t("Start")} {due.dueType}
+        {t("Start")} {t(due.dueType)}
       </Button>
       <Divider sx={{ width: "90%" }} />
     </Box>

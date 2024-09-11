@@ -1,10 +1,12 @@
 import { Box, Typography, Divider } from "@mui/material";
 import photo from "../assets/Avatar.png";
 import { Announcement } from "../services/FetchAannouncementS";
+
 interface AnnouncementItemProps {
   announcement: Announcement;
 }
 const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
+
   return (
     <Box
       sx={{
@@ -77,6 +79,7 @@ const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
               color: "#c7d3da",
               fontSize: "1rem",
               textAlign: { xs: "center", sm: "left" },
+              
             }}
           >
             {announcement.subject}

@@ -18,5 +18,7 @@
   "Start": "Start",
   "DueTo": "Due To",
   "course": "Course",
-  "topic": "Topic"
+  "topic": "Topic",
+  "Assignment": "Assignment",
+  "Quiz": "Quiz"
 }
