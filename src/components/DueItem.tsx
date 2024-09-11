@@ -1,16 +1,26 @@
 import { Typography, Box, Divider, Button } from "@mui/material";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import { Due } from "../services/FetchDues";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { t } from "i18next";
+import { ar } from "date-fns/locale";
 
 interface DueItemProps {
   due: Due;
 }
-const DueItem = ({ due }: DueItemProps) => {
-  const dueDate = new Date(due.DueTo);
 
-  const formattedDate = format(dueDate, 'd MMM yyyy - hh:mm a');
+const DueItem = ({ due }: DueItemProps) => {
+  const language = useSelector((state: RootState) => state.language.language);
+
+  const dueDate = new Date(due.DueTo);
+  const formattedDate = format(dueDate, "d MMM yyyy - hh:mm a", {
+    locale: language === "ar" ? ar : undefined,
+  });
+  const textAlign = language === "en" ? "left" : "right";
+  const direction = language === "en" ? "ltr" : "rtl";
 
   return (
     <Box
@@ -22,19 +32,23 @@ const DueItem = ({ due }: DueItemProps) => {
         alignItems: "flex-start",
         marginTop: "1rem",
         padding: "1rem",
+        textAlign: textAlign,
+        direction: direction,
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: ".5em" }}>
-        {
-          due.dueType === "Assignment" ? <HourglassTopIcon sx={{ color: "#52CAC3" }} /> : <AssignmentTurnedInIcon sx={{ color: "#52CAC3" }} />
-        }
+        {due.dueType === "Assignment" ? (
+          <HourglassTopIcon sx={{ color: "#52CAC3" }} />
+        ) : (
+          <AssignmentTurnedInIcon sx={{ color: "#52CAC3" }} />
+        )}
         <Typography
           variant="h6"
           fontWeight={700}
           fontFamily={"Inria Sans"}
           sx={{ color: "#5d6c6b" }}
         >
-        {due.title}
+          {due.title}
         </Typography>
       </Box>
 
@@ -44,7 +58,7 @@ const DueItem = ({ due }: DueItemProps) => {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Course : {due.courseName}
+        {t("course")} : {due.courseName}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -52,7 +66,7 @@ const DueItem = ({ due }: DueItemProps) => {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Topic : {due.topic}
+        {t("topic")} : {due.topic}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -60,7 +74,7 @@ const DueItem = ({ due }: DueItemProps) => {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        Due To: {formattedDate}
+        {t("DueTo")} : {formattedDate}
       </Typography>
       <Button
         sx={{
@@ -73,7 +87,7 @@ const DueItem = ({ due }: DueItemProps) => {
         }}
         variant="outlined"
       >
-        Start {due.dueType}
+        {t("Start")} {due.dueType}
       </Button>
       <Divider sx={{ width: "90%" }} />
     </Box>

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 const NavItems: itemProps[] = [
   { title: "Dashboard", icon: <HouseIcon /> },
@@ -84,7 +85,7 @@ const Sidebar = () => {
             <SlidebarItem
               key={NavItem.title}
               icon={NavItem.icon}
-              title={NavItem.title}
+              title={t(NavItem.title)}
               onClick={NavItem.title === "Logout" ? handleLogout : undefined}
             />
           ))}

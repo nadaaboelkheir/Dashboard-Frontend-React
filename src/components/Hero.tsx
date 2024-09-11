@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import hero from "../assets/hero.png";
+import { t } from "i18next";
 
 function Hero() {
   return (
@@ -24,7 +25,7 @@ function Hero() {
         backgroundColor: "white",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.1)",
         margin: "2rem auto",
-        
+
         borderRadius: ".5rem",
         textAlign: {
           xs: "center",
@@ -47,26 +48,27 @@ function Hero() {
           },
         }}
       >
-          <Box
-        component={"img"}
-        src={hero}
-        sx={{
-          width: {
-            xs: "80%",
-            sm: "60%",
-            lg: "25%",
-          },
-          maxWidth: "100%",
-          margin: {
-            xs: "1rem auto",
-            lg: "0",
-          },
-          display:{
-            xs: "block",
-            lg: "none",
-          }
-        }}
-      />
+        <Box
+          component={"img"}
+          loading="lazy"
+          src={hero}
+          sx={{
+            width: {
+              xs: "80%",
+              sm: "60%",
+              lg: "25%",
+            },
+            maxWidth: "100%",
+            margin: {
+              xs: "1rem auto",
+              lg: "0",
+            },
+            display: {
+              xs: "block",
+              lg: "none",
+            },
+          }}
+        />
         <Typography
           variant="h3"
           sx={{
@@ -83,8 +85,7 @@ function Hero() {
             },
           }}
         >
-          Exams Time
-        </Typography>
+{t("heroTitle") }       </Typography>
         <Typography
           variant="h6"
           sx={{
@@ -99,9 +100,7 @@ function Hero() {
             textAlign: "left",
           }}
         >
-          Here we are, Are you ready to fight? Don’t worry, we prepared some
-          tips <br />
-          to be ready for your exams.{" "}
+          {t("heroSubtitle")}
         </Typography>
         <Typography
           variant="subtitle1"
@@ -116,8 +115,7 @@ function Hero() {
             },
           }}
         >
-          "Nothing happens until something moves." - Albert Einstein
-        </Typography>
+{t("quote")}        </Typography>
         <Button
           sx={{
             backgroundColor: "#55cfc6",
@@ -134,12 +132,14 @@ function Hero() {
           variant="contained"
           size="large"
         >
-          View Exam Tips{" "}
+          {t("heroButton")} 
         </Button>
       </Box>
       <Box
         component={"img"}
+        loading="lazy"
         src={hero}
+        alt="hero"
         sx={{
           width: {
             xs: "80%",
@@ -151,10 +151,10 @@ function Hero() {
             xs: "1rem auto",
             lg: "0",
           },
-          display:{
+          display: {
             xs: "none",
             lg: "block",
-          }
+          },
         }}
       />
     </Box>

@@ -3,6 +3,7 @@ import DueItem from "./DueItem";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDues, Due } from "../services/FetchDues";
 import ErrorIcon from "@mui/icons-material/Error";
+import { t } from "i18next";
 
 const DueSection = () => {
   const { data, isLoading, error } = useQuery<Due[]>({
@@ -35,8 +36,7 @@ const DueSection = () => {
           fontFamily={"Inria Sans"}
           sx={{ color: "#5d6c6b" }}
         >
-          What Dues ?{" "}
-        </Typography>
+  {t("sectionHeading")}        </Typography>
         <Button
           sx={{
             color: "#52CAC3",
@@ -49,17 +49,17 @@ const DueSection = () => {
             },
           }}
         >
-          All
-        </Button>
+          {t("all")}
+          </Button>
       </Box>
       <Typography
         variant="subtitle1"
         fontWeight={400}
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
-      >
-        We educate warriors,stay updated!
-      </Typography>
+      > 
+      {t("sectionSubtitle")}
+            </Typography>
       {isLoading && (
         <Box
           sx={{

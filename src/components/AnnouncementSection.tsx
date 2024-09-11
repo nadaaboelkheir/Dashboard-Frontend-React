@@ -6,6 +6,7 @@ import {
   fetchAnnouncements,
   Announcement,
 } from "../services/FetchAannouncementS";
+import { t } from "i18next";
 
 const AnnouncementSection = () => {
   const { data, isLoading, error } = useQuery<Announcement[]>({
@@ -39,7 +40,7 @@ const AnnouncementSection = () => {
           fontFamily={"Inria Sans"}
           sx={{ color: "#5d6c6b" }}
         >
-          Announcements
+          {t("Announcements")}
         </Typography>
         <Button
           sx={{
@@ -53,7 +54,7 @@ const AnnouncementSection = () => {
             },
           }}
         >
-          All
+          {t("all")}
         </Button>
       </Box>
       <Typography
@@ -62,7 +63,7 @@ const AnnouncementSection = () => {
         fontFamily={"Inria Sans"}
         sx={{ color: "#c7d3da" }}
       >
-        We educate warriors,stay updated!
+      {t("sectionSubtitle")}
       </Typography>
       <Box
         sx={{
