@@ -2,7 +2,7 @@ import { Box, Typography, Divider } from "@mui/material";
 import photo from "../assets/Avatar.png";
 import { Announcement } from "../services/FetchAannouncementS";
 interface AnnouncementItemProps {
-  announcement: Announcement; 
+  announcement: Announcement;
 }
 const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
   return (
@@ -11,7 +11,7 @@ const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
         display: "flex",
         alignItems: "center",
         flexDirection: {
-          xs: "column",
+          xs: "row",
           sm: "row",
         },
         gap: "1rem",
@@ -35,9 +35,11 @@ const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
       />
       <Box
         sx={{
+          width: { lg: "100%", xs: "80%", sm: "100%" },
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: ".5rem",
         }}
       >
@@ -89,7 +91,6 @@ const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
           }}
         ></Box>
         <Divider orientation="vertical" flexItem />
-
         <Typography
           variant="subtitle1"
           sx={{
@@ -100,6 +101,9 @@ const AnnouncementItem = ({ announcement }: AnnouncementItemProps) => {
               sm: ".8rem",
               lg: "1rem",
             },
+            whiteSpace: { xs: "normal" },
+            overflow: "hidden",
+            wordWrap: "break-word",
           }}
         >
           {announcement.content}

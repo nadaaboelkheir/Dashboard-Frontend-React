@@ -103,7 +103,7 @@ const DueSection = () => {
         </Typography>
       )}
       {data?.map((due) => (
-        <DueItem key={due.id} due={due} />
+        <DueItem key={due._id} due={due} />
       ))}
     </Box>
   );

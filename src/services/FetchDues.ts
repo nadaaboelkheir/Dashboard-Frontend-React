@@ -1,6 +1,6 @@
 import axios from "axios";
 export interface Due {
-  id: string;
+  _id: string;
   title: string;
   topic: string;
   DueTo: string
