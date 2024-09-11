@@ -55,6 +55,7 @@ function Header() {
             display: {
               xs: "none",
               sm: "block",
+
             },
 
             backgroundColor: "white",
@@ -150,7 +151,7 @@ function Header() {
               borderRadius: "50%",
               display: {
                 xs: "none",
-                sm: "none",
+                sm: "block",
 
               },
             }}
