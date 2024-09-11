@@ -150,7 +150,8 @@ function Header() {
               borderRadius: "50%",
               display: {
                 xs: "none",
-                sm: "block",
+                sm: "none",
+
               },
             }}
           />
