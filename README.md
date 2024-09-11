@@ -65,7 +65,5 @@ npm run dev
 1. **Switching Languages**: Use the language switcher to toggle between English and Arabic.
 2. **Lazy Loading Images**: Images will be loaded as they enter the viewport to improve performance.
 
-For more details on customization and further development, refer to the documentation for each technology used.
 
-```
 
